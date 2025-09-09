@@ -1,0 +1,13 @@
+#### **File Contents**
+
+**1. `policy-guard/.gitignore`**
+
+This file tells Git which files and folders to ignore, such as the virtual environment and temporary cache files.
+
+```gitignore
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+.DS_Store
