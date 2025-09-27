@@ -2,6 +2,7 @@ import os
 import click
 from dotenv import load_dotenv
 from src.policy_loader import load_and_validate_policy, PolicyError
+from src.core_engine import moderate_text
 
 # Load environment variables from .env file
 load_dotenv()
@@ -37,10 +38,29 @@ def process(file, policy):
         click.secho(f"Error loading policy: {e}", fg='red')
         return
 
-    click.echo(f"Processing file: {file}")
     click.echo("-----------------------------------------")
-    # In future parts, we will add the core logic here.
-    click.echo("🚧 Part 2 setup complete. The application can now load and validate policies.")
+    
+    # 3. Process the input file
+    try:
+        with open(file, 'r') as f:
+            for i, line in enumerate(f):
+                text_to_check = line.strip()
+                if not text_to_check:
+                    continue
+
+                click.echo(f"Checking line {i+1}: \"{text_to_check}\"")
+                result = moderate_text(text_to_check, loaded_policy)
+                
+                if result['flagged']:
+                    click.secho(f"  -> FLAGGED. Reason: {result['reason']}. Details: {result['details']}", fg='yellow')
+                else:
+                    click.secho(f"  -> OK. Reason: {result['reason']}.", fg='green')
+                    
+    except Exception as e:
+        click.secho(f"An error occurred while processing the file: {e}", fg='red')
+
+    click.echo("-----------------------------------------")
+    click.echo("✅ Processing complete.")
 
 
 if __name__ == '__main__':
