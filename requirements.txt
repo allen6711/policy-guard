@@ -2,3 +2,5 @@ openai
 click
 python-dotenv
 jsonschema
+pandas
+tqdm
