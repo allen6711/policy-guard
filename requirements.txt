@@ -1,1 +1,4 @@
-# No external dependencies yet.
+openai
+click
+python-dotenv
+jsonschema

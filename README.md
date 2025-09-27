@@ -1,23 +1,22 @@
-# PolicyGuard
+# PolicyGuard – LLM-Powered Moderation System
 
-A robust and extensible policy management and enforcement tool.
-
-## Introduction
-
-Welcome to PolicyGuard, a versatile tool designed to define, manage, and enforce policies across various domains, such as data governance, access control, or system configuration. Our goal is to provide a reliable framework that ensures compliance and security by automatically checking and acting upon predefined rules.
+An LLM-powered, rule-enhanced moderation system for scalable text-processing pipelines. This tool uses the OpenAI API, custom rule-based filters, and a JSON Schema for policy definition to create a powerful and auditable moderation workflow.
 
 ## Features
 
-- **Policy Definition:** Easily define policies using a human-readable format.
-- **Real-time Monitoring:** Continuously monitor systems or data streams for policy violations.
-- **Alerting & Reporting:** Generate alerts and detailed reports when policies are not met.
-- **Scalable Architecture:** Designed to handle a growing number of policies and data inputs.
+- **Hybrid Moderation:** Combines the nuance of Large Language Models with the precision of rule-based filters (Regex, keyword sets).
+- **Structured Policies:** Define moderation policies using a modular and clear JSON Schema.
+- **Batch Processing:** A command-line interface (CLI) designed to validate thousands of records from a file.
+- **Audit Trail:** Flagged outputs are stored in a structured format to support human review and compliance audits.
 
 ## Getting Started
 
 ### Prerequisites
+- Python 3.8+
+- An OpenAI API Key
 
-Make sure you have Python 3.8 or higher installed.
-
-```bash
-python --version
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/allen6711/policy-guard.git](https://github.com/allen6711/policy-guard.git)
+   cd policy-guard
