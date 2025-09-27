@@ -1,0 +1,17 @@
+{
+    "name": "Toxic Content Policy",
+    "description": "Detects and flags toxic language, insults, and hate speech.",
+    "llm_prompt": "You are a content moderator. Analyze the following text and determine if it contains toxic content, insults, or hate speech. Respond with 'flag' if it violates the policy, or 'ok' if it does not.",
+    "rules": [
+        {
+            "type": "keyword",
+            "description": "A list of high-confidence toxic keywords.",
+            "value": [
+                "idiot",
+                "stupid",
+                "hate",
+                "kill"
+            ]
+        }
+    ]
+}
