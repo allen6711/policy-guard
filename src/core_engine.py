@@ -2,13 +2,8 @@ import os
 from openai import OpenAI
 
 # Initialize the OpenAI client
-# It will automatically read the OPENAI_API_KEY from the .env file
-try:
-    client = OpenAI()
-except Exception as e:
-    # Handle cases where the API key might be missing or invalid upon initialization
-    print(f"Error initializing OpenAI client: {e}")
-    client = None
+# It will automatically read the OPENAI_API_KEY from the environment
+client = OpenAI()
 
 def moderate_text(text: str, policy: dict) -> dict:
     """
@@ -33,13 +28,6 @@ def moderate_text(text: str, policy: dict) -> dict:
                     }
 
     # 2. LLM Analysis (if not caught by rules)
-    if not client:
-        return {
-            'flagged': False,
-            'reason': 'client_not_initialized',
-            'details': 'OpenAI client failed to initialize. Skipping LLM check.'
-        }
-        
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -66,6 +54,13 @@ def moderate_text(text: str, policy: dict) -> dict:
             }
 
     except Exception as e:
+        # Added a fallback if the client failed to initialize despite the fix
+        if not client:
+            return {
+                'flagged': False,
+                'reason': 'client_not_initialized',
+                'details': 'OpenAI client failed to initialize. Skipping LLM check.'
+            }
         return {
             'flagged': False,
             'reason': 'api_error',
